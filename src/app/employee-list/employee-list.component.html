@@ -1,0 +1,57 @@
+<app-header></app-header>
+<div class="custom-container">
+  <div *ngIf="currentEmployees.length === 0 && previousEmployees.length === 0" class="empty-state">
+    <img src="assets/3293477.jpg" alt="No employees">
+    <p>No employee records found</p>
+  </div>
+
+  <div class="scrollable-container">
+    <div *ngIf="currentEmployees.length > 0" class="employee-section">
+      <h2>Current Employees</h2>
+      <div *ngFor="let employee of currentEmployees; let i = index" class="employee-wrapper">
+        <div class="background">
+          <div class="delete-icon"><i class="fa fa-trash"></i></div>
+        </div>
+        <div class="employee" appSwipe (swipeleft)="deleteEmployee(i)" (click)="editEmployee(employee.id || 0)">
+          <div class="employee-info" (mouseenter)="employee.hover = true" (mouseleave)="employee.hover = false">
+           <div>
+            <p>{{ employee.name }}</p>
+            <p>{{ employee.role }}</p>
+            <p>{{ employee.fromDate | date }}</p>
+           </div>
+            <div *ngIf="employee.hover" class="delete-icon" (click)="deleteEmployee(i, $event)"><i class="fa fa-trash"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="previousEmployees.length > 0" class="employee-section">
+      <h2>Previous Employees</h2>
+      <div *ngFor="let employee of previousEmployees; let i = index" class="employee-wrapper">
+        <div class="background">
+          <div class="delete-icon"><i class="fa fa-trash"></i></div>
+        </div>
+        <div class="employee" appSwipe (swipeleft)="deleteEmployee(i + currentEmployees.length)" (click)="editEmployee(employee.id || 0)">
+          <div class="employee-info" (mouseenter)="employee.hover = true" (mouseleave)="employee.hover = false">
+           <div>
+            <p>{{ employee.name }}</p>
+            <p>{{ employee.role }}</p>
+            <p>{{ employee.fromDate | date }} - {{ employee.toDate | date }}</p>
+           </div>
+            <div *ngIf="employee.hover" class="delete-icon" (click)="deleteEmployee(i, $event)"><i class="fa fa-trash"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+<app-footer [showSwipeDelete]="currentEmployees.length > 0 || previousEmployees.length > 0" [showAddButton]="true"></app-footer>
+
+
+<!-- <div class="delete-all-employees">
+  <button class="btn btn-primary" (click)="deleteAllEmployees()">Delete All Employees</button>
+</div> -->
+
+
+

@@ -1,0 +1,42 @@
+.header {
+    background-color: #009FBD;
+    color: white;
+    padding: 1rem;
+    font-family: 'Arial', sans-serif; 
+    width: 100%;    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .heading {
+    font-size: 22px;
+    margin: 0;
+    word-wrap: break-word;
+    cursor: pointer;
+  }
+  
+  .delete-icon {
+    font-size: 22px;
+    cursor: pointer;
+    color: white;
+  }
+  
+  @media (max-width: 768px) {
+    .heading {
+      font-size: 1.5rem;
+    }
+    .delete-icon {
+      font-size: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .heading {
+      font-size: 1.2rem;
+    }
+    .delete-icon {
+      font-size: 1.2rem;
+    }
+  }
+  

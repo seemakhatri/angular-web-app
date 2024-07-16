@@ -1,0 +1,8 @@
+<header class="header">
+  <h1 class="heading">
+    {{ headerTitle }}
+  </h1>
+  <span *ngIf="showDeleteIcon" class="delete-icon" (click)="deleteEmployee()">
+    <i class="fa fa-trash"></i>
+  </span>
+</header>

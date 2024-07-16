@@ -1,0 +1,15 @@
+<footer class="footer">
+    <div class="footer-content">
+      <div *ngIf="showSwipeDelete" class="swipe-delete">
+        <span>Swipe left to delete</span>
+      </div>
+      
+      <button *ngIf="showAddButton" class="add-button" (click)="goToAddEmployee()">+</button>
+      
+      <div *ngIf="showCancelSaveButtons" class="cancel-save-buttons">
+        <button class="cancel-button" (click)="onCancel()">Cancel</button>
+        <button class="save-button" (click)="onSave()">Save</button>
+      </div>
+    </div>
+  </footer>
+  

@@ -1,0 +1,133 @@
+
+<app-header [headerTitle]="headerTitle" [showDeleteIcon]="showDeleteIcon" (deleteEmployeeEvent)="deleteEmployee()"></app-header>
+
+<div class="container">
+    <div class="panel">
+      <div class="panel-body p-1">
+        <form [formGroup]="editForm">
+          <div class="form-group pt-3">
+            <div class="input-field">
+              <span class="fa fa-user p-2"></span>
+              <input formControlName="name" type="text" placeholder="Employee Name">
+            </div>
+          </div>
+  
+   
+          <div class="form-group pt-3 dropdown">
+              <div class="input-field btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="fa fa-briefcase p-2"></span>
+                <input formControlName="role" type="text" placeholder="Select Role" readonly>
+              </div>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" (click)="selectRole('Product Designer')">Product Designer</a></li>
+                <li><a class="dropdown-item" (click)="selectRole('Flutter Developer')">Flutter Developer</a></li>
+                <li><a class="dropdown-item" (click)="selectRole('QA Tester')">QA Tester</a></li>
+                <li><a class="dropdown-item" (click)="selectRole('Product Owner')">Product Owner</a></li>
+              </ul>
+            </div>
+            
+            
+          <div class="row">
+            <!-- From Date Picker -->
+            <div class="col-sm-5 form-group pt-3 position-relative">
+              <div class="input-field" (click)="toggleDatePicker('fromDate')">
+                <span class="fa fa-calendar p-2"></span>
+                <input type="text" placeholder="Today" class="form-control" formControlName="fromDate" readonly>
+              </div>
+              <div id="fromDatePicker" class="date-picker">
+                <div class="date-picker-buttons">
+                  <div class="button-row">
+                    <button (click)="setToday('fromDate')">Today</button>
+                    <button class="next-monday" (click)="setNextMonday('fromDate')">Next Monday</button>
+                  </div>
+                  <div class="button-row">
+                    <button (click)="setNextTuesday('fromDate')">Next Tuesday</button>
+                    <button (click)="setAfterOneWeek('fromDate')">After 1 Week</button>
+                  </div>
+                </div>
+                <div class="date-picker-header">
+                  <button (click)="prevMonth('fromDate')">&lt;</button>
+                  <span>{{ fromDateCurrentMonth | date: 'MMMM yyyy' }}</span>
+                  <button (click)="nextMonth('fromDate')">&gt;</button>
+                </div>
+                <div class="date-picker-body">
+                  <div class="days-of-week">
+                    <div *ngFor="let day of daysOfWeek">{{ day }}</div>
+                  </div>
+                  <div class="days">
+                    <div *ngFor="let date of fromDateCalendar" [class.disabled]="date.isOtherMonth"  [class.today]="date.isToday" (click)="selectDate('fromDate', date)">
+                      {{ date.day }}
+                    </div>
+                  </div>
+                </div>
+                <div class="date-picker-footer">
+                  <div class="selected-date">
+                    <span class="fa fa-calendar p-2"></span>
+                    <span>{{ editForm.controls['fromDate'].value }}</span>
+                  </div>
+                  <div class="cancel-save">
+                    <button (click)="cancelDate('fromDate')">Cancel</button>
+                    <button class="save-button" (click)="saveDate('fromDate')">Save</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Arrow Icon -->
+            <div class="col-sm-2 d-flex align-items-center justify-content-center arrow-icon">
+              <span class="fa fa-long-arrow-right"></span>
+            </div>
+  
+            <!-- To Date Picker -->
+            <div class="col-sm-5 form-group mb-3 pt-3 position-relative">
+              <div class="input-field" (click)="toggleDatePicker('toDate')">
+                <span class="fa fa-calendar p-2"></span>
+                <input type="text" placeholder="No Date" class="form-control" formControlName="toDate" readonly>
+              </div>
+              <div id="toDatePicker" class="date-picker">
+                <div class="date-picker-buttons">
+                  <div class="button-row">
+                      <button (click)="setNoDate('toDate')">No Date</button>
+                      <button class="next-monday" (click)="setNextMonday('toDate')">Today</button>
+                  </div>
+                </div>
+                <div class="date-picker-header">
+                  <button (click)="prevMonth('toDate')">&lt;</button>
+                  <span>{{ toDateCurrentMonth | date: 'MMMM yyyy' }}</span>
+                  <button (click)="nextMonth('toDate')">&gt;</button>
+                </div>
+                <div class="date-picker-body">
+                  <div class="days-of-week">
+                    <div *ngFor="let day of daysOfWeek">{{ day }}</div>
+                  </div>
+                  <div class="days">
+                    <div *ngFor="let date of toDateCalendar"  [class.today]="date.isToday" [class.disabled]="date.isOtherMonth" (click)="selectDate('toDate', date)">
+                      {{ date.day }}
+                    </div>
+                  </div>
+                </div>
+                <div class="date-picker-footer">
+                  <div class="selected-date">
+                    <span class="fa fa-calendar p-2"></span>
+                    <span>{{ editForm.controls['toDate'].value }}</span>
+                  </div>
+                  <div class="cancel-save">
+                    <button (click)="cancelDate('toDate')">Cancel</button>
+                    <button class="save-button" (click)="saveDate('toDate')">Save</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  
+
+  <app-footer 
+  [showCancelSaveButtons]="true"
+  (cancelEvent)="onCancel()"
+  (saveEvent)="onSave()">
+  </app-footer>

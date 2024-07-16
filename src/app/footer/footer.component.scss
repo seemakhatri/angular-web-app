@@ -1,0 +1,60 @@
+.footer {
+  background-color: #ffffff;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-family: 'Arial', sans-serif;
+    border-top: 1px solid rgb(235, 235, 235);
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .add-button {
+    padding: 3px 15px;
+    background-color: #009FBD;
+    color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  .save-button {
+    margin: 0 5px;
+    padding: 3px 15px;
+    border: none;
+    background-color: #009FBD;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .cancel-button {
+    margin: 0 5px;
+    padding: 3px 15px;
+    border: none;
+    background-color: #f3fdff;
+    color: #009FBD;
+    border: 1px solid #dcfaff;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .swipe-delete {
+    align-items: flex-start;
+    margin: 0 10px;
+    color: rgb(114, 114, 114);
+    cursor: pointer;
+  }
+  
+  .cancel-save-buttons {
+    display: flex;
+    margin-left: auto;
+  }
+  
